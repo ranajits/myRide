@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorbluedark"
+    tools:context="rnjt.com.myride.LoginActivity">
+    <LinearLayout
+        android:id="@+id/layTop"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@drawable/ambala_top"
+        android:orientation="vertical"
+        ></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_below="@+id/layTop"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/imguser"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/driver_logo"
+       />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login Via"
+            android:textSize="25sp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textColor="@color/coloryellow"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/line_yellow"
+         />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgFb"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:src="@drawable/fb_logo_2"
+                android:layout_weight="1"/>
+            <ImageView
+                android:id="@+id/imgGmail"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:src="@drawable/gmail_logo"
+                android:layout_weight="1"/>
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtMob"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile Number"
+            android:textSize="25sp"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textColor="@color/coloryellow"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
