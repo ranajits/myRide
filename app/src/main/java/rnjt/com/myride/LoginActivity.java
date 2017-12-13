@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
             img_usertype.setImageResource(R.drawable.user_logo);
         }
 
-        
+
 
 
         findViewById(R.id.imgFb).setOnClickListener(new View.OnClickListener() {
