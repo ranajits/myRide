@@ -1,10 +1,9 @@
-package com.fw.olauberintegration.DrawRoute;
+package rnjt.com.myride.DrawRoute;
 
 import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
-import com.fw.olauberintegration.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -14,6 +13,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import rnjt.com.myride.R;
 
 /**
  * Created by ocittwo on 11/14/16.

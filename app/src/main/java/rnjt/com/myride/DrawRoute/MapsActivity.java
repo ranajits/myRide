@@ -1,4 +1,4 @@
-package com.fw.olauberintegration;
+package rnjt.com.myride.DrawRoute;
 
 import android.content.pm.PackageManager;
 import android.graphics.Point;
@@ -11,8 +11,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.fw.olauberintegration.DrawRoute.DrawMarker;
-import com.fw.olauberintegration.DrawRoute.DrawRouteMaps;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -24,6 +22,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import rnjt.com.myride.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback ,LocationListener,
         GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener{
@@ -64,8 +64,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng destination = toPosition;//new LatLng(-7.781200, 110.349709);
         DrawRouteMaps.getInstance(this)
                 .draw(origin, destination, mMap);
-        DrawMarker.getInstance(this).draw(mMap, origin, R.mipmap.marker_a, "Origin Location");
-        DrawMarker.getInstance(this).draw(mMap, destination, R.mipmap.marker_b, "Destination Location");
+        DrawMarker.getInstance(this).draw(mMap, origin, R.drawable.marker, "Origin Location");
+        DrawMarker.getInstance(this).draw(mMap, destination, R.drawable.marker, "Destination Location");
 
         LatLngBounds bounds = new LatLngBounds.Builder()
                 .include(origin)
@@ -84,8 +84,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
        // LatLng destination = new LatLng(19.119677, 72.905081);
         DrawRouteMaps.getInstance(this)
                 .draw(origin, destination, mMap);
-        DrawMarker.getInstance(this).draw(mMap, origin, R.mipmap.marker_a, "Origin Location");
-        DrawMarker.getInstance(this).draw(mMap, destination, R.mipmap.marker_b, "Destination Location");
+        DrawMarker.getInstance(this).draw(mMap, origin, R.drawable.marker, "Origin Location");
+        DrawMarker.getInstance(this).draw(mMap, destination, R.drawable.marker, "Destination Location");
 
         LatLngBounds bounds = new LatLngBounds.Builder()
                 .include(origin)

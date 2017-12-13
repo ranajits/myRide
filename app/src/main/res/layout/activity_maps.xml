@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorbluemedium"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_logo_ambula"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layTop"
+        tools:context=".MapsActivity" />
+
+
+
+    <RelativeLayout
+        android:id="@+id/layCarInfo"
+        android:padding="10dp"
+        android:background="@color/colorbluedark"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/layTop"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/layCarDetail"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:weightSum="6"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_usertype"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/driver_logo"
+                android:layout_weight="2"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:padding="5dp"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtArTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Arriving: 5 Mins"
+                    android:textSize="25sp"
+                    android:paddingLeft="7dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="7dp"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:textColor="@color/coloryellow"
+                    />
+
+
+                <TextView
+                    android:id="@+id/txtCarType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Maruti Suzuki Swift"
+                    android:textSize="18sp"
+                    android:padding="7dp"
+                    android:gravity="left"
+                    android:textColor="@android:color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/txtCarNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MH 05 CD 1900"
+                    android:textAllCaps="true"
+                    android:textSize="18sp"
+                    android:padding="7dp"
+                    android:gravity="left"
+                    android:textColor="@android:color/white"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/txtBookCar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layCarDetail"
+            android:text="Book Now"
+            android:layout_centerHorizontal="true"
+            android:background="@color/coloryellow"
+            android:textAllCaps="true"
+            android:textSize="22sp"
+            android:layout_margin="8dp"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textColor="@color/colorbluedark"
+            />
+        layCarDetail
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/coloryellow"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/txtAuto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Auto"
+            android:textColor="@color/colorbluedark"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtCar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Car"
+            android:textColor="@color/colorbluedark"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtExc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Exclusive"
+            android:textColor="@color/colorbluedark"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layLocation"
+        android:layout_width="match_parent"
+        android:padding="25dp"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:clickable="false">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20sp"
+                android:layout_marginTop="100dp"
+                android:padding="30dp"
+                android:background="@android:color/white">
+
+
+                <TextView
+                    android:id="@+id/txtPickLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Pick Location" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/etPickLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/colorbluedark"
+                    android:layout_below="@+id/txtPickLocation"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/txtDropLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/etPickLocation"
+                    android:padding="10dp"
+                    android:text="Drop Location" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/etDropLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtDropLocation"
+                    android:textColor="@color/colorbluedark"
+                    android:paddingRight="10dp"
+                    android:singleLine="true"/>
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/etDropLocation"
+                    android:text="Submit"
+                    android:layout_margin="20dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorbluedark"
+                    android:background="@color/colorbluemedium"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
