@@ -1,8 +1,8 @@
 package rnjt.com.myride;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
             img_usertype.setImageResource(R.drawable.user_logo);
         }
 
+        
 
 
         findViewById(R.id.imgFb).setOnClickListener(new View.OnClickListener() {
