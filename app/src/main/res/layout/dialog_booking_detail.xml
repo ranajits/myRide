@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/colorbluedark"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/layTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorbluemedium"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_logo_ambula"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtHistory"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Ambulance Booked ! "
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="35dp"
+        android:paddingTop="20dp"
+        android:layout_below="@+id/layTop"
+        android:paddingRight="35dp"
+        android:paddingBottom="20dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/coloryellow"
+        />
+
+
+    <TextView
+        android:id="@+id/txtinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ambulance Booked ! "
+        android:textSize="20sp"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:layout_below="@+id/layTop"
+        android:paddingRight="10dp"
+        android:paddingBottom="20dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorbluedark"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:layout_margin="15dp"
+        android:layout_gravity="center"
+        android:background="@color/coloryellow"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:text="Add Patient Details"/>
+
+    <TextView
+        android:id="@+id/txtAddlater"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Add later"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="35dp"
+        android:paddingTop="20dp"
+        android:layout_below="@+id/layTop"
+        android:paddingRight="35dp"
+        android:paddingBottom="20dp"
+        android:gravity="center"
+        android:textColor="@color/coloryellow"
+        />
+
+</LinearLayout>

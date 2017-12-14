@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import rnjt.com.myride.DrawRoute.ShowRouteActivity;
-
 public class UserDashboardActivity extends AppCompatActivity {
 
     @Override
@@ -20,6 +18,15 @@ public class UserDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(UserDashboardActivity.this, ShowRouteActivity.class));
+
+            }
+        });
+
+
+        findViewById(R.id.imgHistory).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserDashboardActivity.this, BookingHistoryActivity.class));
 
             }
         });
