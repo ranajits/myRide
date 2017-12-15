@@ -1,8 +1,10 @@
 package rnjt.com.myride;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class DriverActivity extends AppCompatActivity {
@@ -44,6 +46,17 @@ public class DriverActivity extends AppCompatActivity {
             txtvMOdel.setText(sharedPreferences.getString("dr_vh_model", "Maruti Suzuki Ritz"));
 
         }
+
+        findViewById(R.id.imgLogout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSharedPreferences("my_ride", MODE_PRIVATE).edit().clear().commit();
+                startActivity(new Intent(DriverActivity.this, SplashScreen.class));
+                finish();
+
+            }
+        });
+
 
 
 

@@ -65,6 +65,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/coloryellow">
         <TextView
+            android:id="@+id/txtuname"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Rajesh Khurana"
@@ -101,5 +102,14 @@
 
         android:src="@drawable/ic_history_black_36dp"
         android:layout_alignParentRight="true"
+        android:layout_weight="1"/>
+
+    <ImageView
+        android:id="@+id/imgLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:padding="15dp"
+
+        android:src="@drawable/ic_power_settings_new_black_36dp"
         android:layout_weight="1"/>
 </RelativeLayout>

@@ -62,6 +62,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 }else {
 
                     Intent intent= new Intent(RegistrationActivity.this, UserDashboardActivity.class);
+                    intent  .putExtra("dr_name", ""+etName.getText().toString());
                     intent  .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 
