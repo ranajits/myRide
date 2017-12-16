@@ -137,7 +137,7 @@
         android:id="@+id/layBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/layBottomCars"
         android:background="@color/coloryellow"
         android:weightSum="3">
 
@@ -147,8 +147,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:padding="10dp"
-            android:text="Auto"
+            android:paddingTop="10dp"
+            android:text="Auto\n5 Mins"
             android:textColor="@color/colorbluedark"
             android:textSize="20sp" />
 
@@ -158,8 +158,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:padding="10dp"
-            android:text="Car"
+            android:paddingTop="10dp"
+            android:text="Car\n2 Mins"
             android:textColor="@color/colorbluedark"
             android:textSize="20sp" />
 
@@ -169,14 +169,52 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:padding="10dp"
-            android:text="Exclusive"
+            android:paddingTop="10dp"
+            android:text="Ambulance\n10 Mins"
             android:textColor="@color/colorbluedark"
             android:textSize="20sp" />
 
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/layBottomCars"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/coloryellow"
+        android:weightSum="3">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:tint="@color/colorbluedark"
+            android:src="@drawable/auto_r"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:tint="@color/colorbluedark"
+            android:src="@drawable/car_front"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:tint="@color/colorbluedark"
+            android:src="@drawable/ambulance2"/>
+
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/layLocation"
@@ -190,16 +228,14 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
                 android:layout_marginTop="50dp"
                 android:padding="30dp"
+                android:orientation="vertical"
                 android:background="@android:color/white">
-
-
-
 
                 <TextView
                     android:id="@+id/txtPickLocation"
@@ -232,7 +268,18 @@
                     android:layout_below="@+id/txtDropLocation"
                     android:textColor="@color/colorbluedark"
                     android:paddingRight="10dp"
+                    android:visibility="gone"
                     android:singleLine="true"/>
+                <Spinner
+                    android:id="@+id/currency_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtDropLocation"
+                    android:textColor="@color/colorbluedark"
+                    android:paddingRight="10dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:gravity="center"/>
 
                 <Button
                     android:id="@+id/btnSubmit"
@@ -240,12 +287,14 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/etDropLocation"
                     android:text="Submit"
-                    android:layout_margin="20dp"
+                    android:layout_gravity="center"
+
+                    android:layout_margin="30dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorbluedark"
                     android:background="@color/colorbluemedium"
                     android:layout_centerHorizontal="true"/>
-            </RelativeLayout>
+            </LinearLayout>
         </ScrollView>
     </RelativeLayout>
 

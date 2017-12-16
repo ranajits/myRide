@@ -13,9 +13,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +32,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -59,6 +63,10 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
     private PlaceAutocompleteAdapter mAdapter;
     private LatLng pickLatLng, dropLatLng;
     boolean isRouteClicked = false;
+    private Spinner mCurSpinner;
+    LatLng goenka= new LatLng(23.325913, 72.683152);
+    LatLng sanidhy= new LatLng(23.016679, 72.470014);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +79,8 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
 
         mEtPickLocation = (AutoCompleteTextView) findViewById(R.id.etPickLocation);
         mEtDropLocation = (AutoCompleteTextView) findViewById(R.id.etDropLocation);
-
+        mCurSpinner = (Spinner) findViewById(R.id.currency_spinner);
+        mCurSpinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, 0, this)
                 .addApi(Places.GEO_DATA_API)
@@ -138,7 +147,7 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
             @Override
             public void onClick(View view) {
 
-                txtCarType.setText("Maruti Suzuki Swift");
+                txtCarType.setText("Bajaj 3 wheeler");
                 txtCarNumber.setText("MH 05 CD 4566");
                 txtArTime.setText("Arriving: 8 Mins");
                 layCarInfo.setVisibility(View.VISIBLE);
@@ -199,6 +208,10 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
         });
 
 
+
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(ShowRouteActivity.this, android.R.layout.simple_spinner_item, mCurrencies);
+        myAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        mCurSpinner.setAdapter(myAdapter);
     }
 
     @Override
@@ -276,10 +289,10 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
         });
 
         text.setText("Arriving : 10 Mins\n\n" +
-                "Vehicle: Swift Dezire\n\n" +
                 "Cost: 127INR\n\n" +
                 "Driver: Ram Pandey\n\n"+
-                "Dr. Assigned: -- ");
+                "Dr. Assigned: Dr.Natraj\n\n"+
+                "Contact No. 8956213257");
 
 // Display the dialog
         dialog.show();
@@ -360,7 +373,35 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
         Point displaySize = new Point();
         getWindowManager().getDefaultDisplay().getSize(displaySize);
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, displaySize.x, 250, 30));
+
+
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(mumbai);
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_local_taxi));
+        markerOptions.title("Mumbai");
+        mMap.addMarker(markerOptions);
+
+
+        MarkerOptions marker2 = new MarkerOptions();
+        marker2.position(gandhinagar);
+        marker2.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_local_taxi));
+        marker2.title("Gandhinagar");
+        mMap.addMarker(marker2);
+
+        MarkerOptions marker3= new MarkerOptions();
+        marker3.position(sabarmati);
+        marker3.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_local_taxi));
+        marker3.title("Sabarmati");
+        mMap.addMarker(marker3);
+
+
     }
+
+    LatLng mumbai= new LatLng(19.075984, 72.877656);
+    LatLng gandhinagar= new LatLng(23.215635, 72.636941);
+    LatLng sabarmati= new LatLng(23.088383, 72.586484);
+
 
 
     @Override
@@ -427,6 +468,27 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
 
     }
 
+
+    private String [] mCurrencies = {"Goenka Hospital, Ganghinagar","Sanidhy Multispeciality Hospital"};
+    private class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+
+          if(pos==0){
+              dropLatLng= goenka;
+          }else {
+              dropLatLng= sanidhy;
+          }
+
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+            // TODO Auto-generated method stub
+        }
+
+    }
 
 
 }

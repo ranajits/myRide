@@ -3,7 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_screen"
     tools:context="rnjt.com.myride.SplashScreen">
+
+    <ImageView
+        android:id="@+id/splashImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_screen"/>
+    <TextView
+        android:id="@+id/txtdName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shreeyansh Gotmare"
+        android:textSize="18sp"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="120dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorbluedark"
+        />
 
 </RelativeLayout>
