@@ -103,7 +103,7 @@
                     android:id="@+id/txtCarNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="MH 05 CD 1900"
+                    android:text="GJ 01 CD 1900"
                     android:textAllCaps="true"
                     android:textSize="18sp"
                     android:padding="7dp"
@@ -220,7 +220,6 @@
         android:id="@+id/layLocation"
         android:layout_width="match_parent"
         android:padding="25dp"
-        android:visibility="gone"
         android:layout_height="match_parent"
         android:background="#80000000"
         android:clickable="false">
@@ -235,13 +234,15 @@
                 android:layout_marginTop="50dp"
                 android:padding="30dp"
                 android:orientation="vertical"
-                android:background="@android:color/white">
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:background="@drawable/black_curved_rectangle_with_border">
 
                 <TextView
                     android:id="@+id/txtPickLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="5dp"
                     android:text="Pick Location" />
 
                 <AutoCompleteTextView
@@ -258,7 +259,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/etPickLocation"
-                    android:padding="10dp"
+                    android:padding="5dp"
+                    android:layout_marginTop="5dp"
                     android:text="Drop Location" />
 
                 <AutoCompleteTextView
@@ -268,8 +270,15 @@
                     android:layout_below="@+id/txtDropLocation"
                     android:textColor="@color/colorbluedark"
                     android:paddingRight="10dp"
-                    android:visibility="gone"
                     android:singleLine="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/etPickLocation"
+                    android:padding="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Nearby" />
                 <Spinner
                     android:id="@+id/currency_spinner"
                     android:layout_width="match_parent"
@@ -277,8 +286,8 @@
                     android:layout_below="@+id/txtDropLocation"
                     android:textColor="@color/colorbluedark"
                     android:paddingRight="10dp"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:gravity="center"/>
 
                 <Button
@@ -288,8 +297,7 @@
                     android:layout_below="@+id/etDropLocation"
                     android:text="Submit"
                     android:layout_gravity="center"
-
-                    android:layout_margin="30dp"
+                    android:layout_margin="20dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorbluedark"
                     android:background="@color/colorbluemedium"
@@ -298,6 +306,12 @@
         </ScrollView>
     </RelativeLayout>
 
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

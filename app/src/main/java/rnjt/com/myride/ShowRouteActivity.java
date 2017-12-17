@@ -7,15 +7,18 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,14 +54,13 @@ import rnjt.com.myride.model.CustomArray;
 
 public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
     private GoogleMap mMap;
-    double latStart = 19.240330, longStart = 73.130539;
 
     RelativeLayout layCarInfo, layLocation;
     TextView txtCarType, txtCarNumber, txtArTime;
 
     AutoCompleteTextView mEtPickLocation;
     AutoCompleteTextView mEtDropLocation;
-
+    private ProgressBar progressBar;
     protected GoogleApiClient mGoogleApiClient;
     private PlaceAutocompleteAdapter mAdapter;
     private LatLng pickLatLng, dropLatLng;
@@ -66,15 +68,18 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
     private Spinner mCurSpinner;
     LatLng goenka= new LatLng(23.325913, 72.683152);
     LatLng sanidhy= new LatLng(23.016679, 72.470014);
+    boolean firstTime= false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+      //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)‌​;
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
 
 
         mEtPickLocation = (AutoCompleteTextView) findViewById(R.id.etPickLocation);
@@ -120,14 +125,15 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
         txtArTime = (TextView) findViewById(R.id.txtArTime);
         txtCarNumber = (TextView) findViewById(R.id.txtCarNumber);
         txtCarType = (TextView) findViewById(R.id.txtCarType);
-
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
         layCarInfo.setVisibility(View.GONE);
 
         findViewById(R.id.txtCar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 txtCarType.setText("Maruti Suzuki Swift");
-                txtCarNumber.setText("MH 16 CD 2365");
+                txtCarNumber.setText("GJ 01 CD 2365");
                 txtArTime.setText("Arriving: 10 Mins");
                 layCarInfo.setVisibility(View.VISIBLE);
             }
@@ -137,7 +143,7 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
             @Override
             public void onClick(View view) {
                 txtCarType.setText("Toyota Traveler XL");
-                txtCarNumber.setText("MH 11 VY 8754");
+                txtCarNumber.setText("GJ 18 VY 8754");
                 txtArTime.setText("Arriving: 3 Mins");
                 layCarInfo.setVisibility(View.VISIBLE);
 
@@ -148,7 +154,7 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
             public void onClick(View view) {
 
                 txtCarType.setText("Bajaj 3 wheeler");
-                txtCarNumber.setText("MH 05 CD 4566");
+                txtCarNumber.setText("GJ 01 CD 4566");
                 txtArTime.setText("Arriving: 8 Mins");
                 layCarInfo.setVisibility(View.VISIBLE);
             }
@@ -226,15 +232,34 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
     }
 
 
+
+    private void showCarArrivingDialog() {
+
+
+        final Dialog dialog = new Dialog(ShowRouteActivity.this);
+
+        dialog.setContentView(R.layout.dialog_arriving);
+        Button text = (Button) dialog.findViewById(R.id.btnSubmit);
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+        dialog.show();
+
+    }
+
+
+
+
+
     private void showPatientDialog() {
 
 
         final Dialog dialog = new Dialog(ShowRouteActivity.this);
 
-// Set the title
-        dialog.setTitle("Dialog Title");
-
-// inflate the layout
         dialog.setContentView(R.layout.dialog_patient_detail);
 
         // Set the dialog text -- this is better done in the XML
@@ -244,7 +269,15 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
             public void onClick(View view) {
                 dialog.dismiss();
                 Toast.makeText(ShowRouteActivity.this, "Patient Details Added Successfully!", Toast.LENGTH_SHORT).show();
-                finish();
+                progressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                        showCarArrivingDialog();
+                    }
+                }, 3000);
+
             }
         });
 
@@ -275,7 +308,14 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                finish();
+                progressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                        showCarArrivingDialog();
+                    }
+                }, 3000);
             }
         });
 
@@ -284,7 +324,7 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-               showPatientDialog();
+                showPatientDialog();
             }
         });
 
@@ -293,8 +333,6 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
                 "Driver: Ram Pandey\n\n"+
                 "Dr. Assigned: Dr.Natraj\n\n"+
                 "Contact No. 8956213257");
-
-// Display the dialog
         dialog.show();
 
     }
@@ -377,26 +415,32 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
 
 
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(mumbai);
+        markerOptions.position(sapna);
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_local_taxi));
-        markerOptions.title("Mumbai");
+        markerOptions.title("Swapna Shrushti Water Park ");
         mMap.addMarker(markerOptions);
 
 
         MarkerOptions marker2 = new MarkerOptions();
-        marker2.position(gandhinagar);
+        marker2.position(national);
         marker2.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_local_taxi));
-        marker2.title("Gandhinagar");
+        marker2.title("National Innovation Foundation");
         mMap.addMarker(marker2);
 
         MarkerOptions marker3= new MarkerOptions();
-        marker3.position(sabarmati);
+        marker3.position(nagesgwari);
         marker3.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_local_taxi));
-        marker3.title("Sabarmati");
+        marker3.title("Nageshwari Mataji Mandir");
         mMap.addMarker(marker3);
 
 
     }
+
+
+    LatLng nagesgwari= new LatLng(23.376712, 72.7064776);
+
+    LatLng national= new LatLng(23.376712, 72.6999115);
+    LatLng sapna= new LatLng(23.3709211, 72.7018427);
 
     LatLng mumbai= new LatLng(19.075984, 72.877656);
     LatLng gandhinagar= new LatLng(23.215635, 72.636941);
@@ -473,14 +517,18 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
     private class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
-          if(pos==0){
-              dropLatLng= goenka;
-          }else {
-              dropLatLng= sanidhy;
-          }
-
-
+            if(pos==0){
+                dropLatLng= goenka;
+               /* if(!firstTime){
+                    firstTime=true;
+                }else {
+                    mEtDropLocation.setText("Goenka Hospital, Ganghinagar");
+                }*/
+                mEtDropLocation.setText("Goenka Hospital, Ganghinagar");
+            }else {
+                dropLatLng= sanidhy;
+                mEtDropLocation.setText("Sanidhy Multispeciality Hospital");
+            }
         }
 
         @Override

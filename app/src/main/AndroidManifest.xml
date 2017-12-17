@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="rnjt.com.myride">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -18,7 +19,8 @@
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".DriverActivity" />
         <activity android:name=".UserDashboardActivity" />
-        <activity android:name=".ShowRouteActivity" />
+        <activity android:name=".ShowRouteActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

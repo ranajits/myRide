@@ -83,6 +83,7 @@
             android:layout_height="match_parent"
             android:text="| 25 | Chandiwali, Powai"
             android:gravity="center"
+            android:visibility="gone"
             android:textSize="17sp"
             android:textColor="@color/colorbluedark"
 

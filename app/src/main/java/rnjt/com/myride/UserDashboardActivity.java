@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class UserDashboardActivity extends AppCompatActivity {
 
@@ -22,10 +23,10 @@ public class UserDashboardActivity extends AppCompatActivity {
         sharedPreferences.edit().putString("user_type", "type_user").commit();
 
         if(getIntent().hasExtra("dr_name")) {
-            txtuname.setText(getIntent().getStringExtra("dr_name"));
+            txtuname.setText("Welcome "+ getIntent().getStringExtra("dr_name"));
             sharedPreferences.edit().putString("dr_name", getIntent().getStringExtra("dr_name")).commit();
         }else {
-            txtuname.setText(sharedPreferences.getString("dr_name", "Raj Malhotra"));
+            txtuname.setText("Welcome "+ sharedPreferences.getString("dr_name", "Raj Malhotra"));
         }
 
         findViewById(R.id.imgAccident).setOnClickListener(new View.OnClickListener() {
@@ -50,6 +51,7 @@ public class UserDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getSharedPreferences("my_ride", MODE_PRIVATE).edit().clear().commit();
+                Toast.makeText(UserDashboardActivity.this, "Succesfully Logged out!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(UserDashboardActivity.this, SplashScreen.class));
                 finish();
 

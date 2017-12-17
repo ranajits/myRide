@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DriverActivity extends AppCompatActivity {
 
@@ -51,6 +52,7 @@ public class DriverActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getSharedPreferences("my_ride", MODE_PRIVATE).edit().clear().commit();
+                Toast.makeText(DriverActivity.this, "Succesfully Logged out!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(DriverActivity.this, SplashScreen.class));
                 finish();
 
