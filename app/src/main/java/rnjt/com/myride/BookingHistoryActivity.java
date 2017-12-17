@@ -1,6 +1,7 @@
 package rnjt.com.myride;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,13 +29,14 @@ public class BookingHistoryActivity extends AppCompatActivity {
 
     ArrayList<CustomArray> customArrays;
     private ProgressBar progressBar;
+    SharedPreferences sharedPreferences ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_history);
         Log.d(" BookingHisty ", " data: " + getArrayVal(BookingHistoryActivity.this));
-
+        sharedPreferences = getSharedPreferences("my_ride", MODE_PRIVATE);
         customArrays = new ArrayList<>();
         customArrays = getArrayVal(BookingHistoryActivity.this);
         RecyclerView rv = (RecyclerView) findViewById(R.id.recycler_view);
@@ -57,7 +59,7 @@ public class BookingHistoryActivity extends AppCompatActivity {
          */
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public TextView countryText;
-            public TextView popText, time;
+            public TextView popText, time, txtarrival;
             public LinearLayout viewLin;
 
             public MyViewHolder(View view) {
@@ -66,6 +68,7 @@ public class BookingHistoryActivity extends AppCompatActivity {
                 popText = (TextView) view.findViewById(R.id.pop);
                 time = (TextView) view.findViewById(R.id.time);
                 viewLin= (LinearLayout) view.findViewById(R.id.view);
+                txtarrival = (TextView) view.findViewById(R.id.txtarrival);
             }
         }
 
@@ -79,19 +82,21 @@ public class BookingHistoryActivity extends AppCompatActivity {
             holder.countryText.setText(c.getCarModel());
             holder.popText.setText("Amount: " + String.valueOf(c.getPrice() + " INR"));
             holder.time.setText("Booking Time: " + getDate(c.getTimestamp(), "dd/MMM/yyyy hh:mm:ss"));
-holder.time.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        progressBar.setVisibility(View.VISIBLE);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.GONE);
-                showCarArrivingDialog();
-            }
-        }, 3000);
-    }
-});
+            holder.txtarrival.setText("Ambulance coming in "+ sharedPreferences.getString("arriving_time", "2 Mins"));
+
+            holder.viewLin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setVisibility(View.GONE);
+                            showCarArrivingDialog();
+                        }
+                    }, 3000);
+                }
+            });
 
         }
 
@@ -125,6 +130,9 @@ holder.time.setOnClickListener(new View.OnClickListener() {
 
         dialog.setContentView(R.layout.dialog_arriving);
         Button text = (Button) dialog.findViewById(R.id.btnSubmit);
+        TextView txtHistory = (TextView) dialog.findViewById(R.id.txtHistory);
+        txtHistory.setText("Ambulance coming in "+sharedPreferences.getString("arriving_time", "2 Mins"));
+
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

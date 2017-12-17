@@ -69,13 +69,14 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
     LatLng goenka= new LatLng(23.325913, 72.683152);
     LatLng sanidhy= new LatLng(23.016679, 72.470014);
     boolean firstTime= false;
-
+    SharedPreferences sharedPreferences ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
       //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)‌​;
+        sharedPreferences = getSharedPreferences("my_ride", MODE_PRIVATE);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -134,8 +135,9 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
             public void onClick(View view) {
                 txtCarType.setText("Maruti Suzuki Swift");
                 txtCarNumber.setText("GJ 01 CD 2365");
-                txtArTime.setText("Arriving: 10 Mins");
+                txtArTime.setText("Arriving: 2 Mins");
                 layCarInfo.setVisibility(View.VISIBLE);
+                sharedPreferences.edit().putString("arriving_time", "2 Mins").commit();
             }
         });
 
@@ -144,8 +146,9 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
             public void onClick(View view) {
                 txtCarType.setText("Toyota Traveler XL");
                 txtCarNumber.setText("GJ 18 VY 8754");
-                txtArTime.setText("Arriving: 3 Mins");
+                txtArTime.setText("Arriving: 10 Mins");
                 layCarInfo.setVisibility(View.VISIBLE);
+                sharedPreferences.edit().putString("arriving_time", "10 Mins").commit();
 
             }
         });
@@ -155,8 +158,9 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
 
                 txtCarType.setText("Bajaj 3 wheeler");
                 txtCarNumber.setText("GJ 01 CD 4566");
-                txtArTime.setText("Arriving: 8 Mins");
+                txtArTime.setText("Arriving: 5 Mins");
                 layCarInfo.setVisibility(View.VISIBLE);
+                sharedPreferences.edit().putString("arriving_time", "5 Mins").commit();
             }
         });
 
@@ -240,6 +244,9 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
 
         dialog.setContentView(R.layout.dialog_arriving);
         Button text = (Button) dialog.findViewById(R.id.btnSubmit);
+
+        TextView txtHistory = (TextView) dialog.findViewById(R.id.txtHistory);
+        txtHistory.setText("Ambulance coming in "+sharedPreferences.getString("arriving_time", "2 Mins"));
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -328,7 +335,9 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
             }
         });
 
-        text.setText("Arriving : 10 Mins\n\n" +
+
+        text.setText("Arriving : "+
+                sharedPreferences.getString("arriving_time", "2 Mins")+"\n\n" +
                 "Cost: 127INR\n\n" +
                 "Driver: Ram Pandey\n\n"+
                 "Dr. Assigned: Dr.Natraj\n\n"+
