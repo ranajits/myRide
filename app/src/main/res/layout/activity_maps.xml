@@ -31,19 +31,32 @@
         android:layout_alignParentRight="true"
         android:layout_weight="1"/>
 
+
+
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:layout_below="@+id/layTop"
         tools:context=".MapsActivity" />
+
+    <ImageView
+        android:id="@+id/imgDummyMap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_map"
+        android:layout_below="@+id/layTop"
+        android:layout_above="@+id/layBottom"
+        />
 
 
 
     <RelativeLayout
         android:id="@+id/layCarInfo"
         android:padding="10dp"
+
         android:background="@color/colorbluedark"
         android:layout_width="match_parent"
         android:layout_below="@+id/layTop"
@@ -220,6 +233,7 @@
         android:id="@+id/layLocation"
         android:layout_width="match_parent"
         android:padding="25dp"
+        android:visibility="gone"
         android:layout_height="match_parent"
         android:background="#80000000"
         android:clickable="false">
@@ -250,6 +264,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="10dp"
+                    android:text="Grambharati, Amrapur Rd, Amrapur"
                     android:textColor="@color/colorbluedark"
                     android:layout_below="@+id/txtPickLocation"
                     android:singleLine="true"/>

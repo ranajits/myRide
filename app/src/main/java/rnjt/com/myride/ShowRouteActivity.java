@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -52,7 +53,7 @@ import rnjt.com.myride.DrawRoute.DrawRouteMaps;
 import rnjt.com.myride.DrawRoute.PlaceAutocompleteAdapter;
 import rnjt.com.myride.model.CustomArray;
 
-public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
+public class ShowRouteActivity extends FragmentActivity{//} implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
     private GoogleMap mMap;
 
     RelativeLayout layCarInfo, layLocation;
@@ -70,6 +71,8 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
     LatLng sanidhy= new LatLng(23.016679, 72.470014);
     boolean firstTime= false;
     SharedPreferences sharedPreferences ;
+    ImageView imgDummyMap;
+    int selectedPos=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,18 +82,18 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
         sharedPreferences = getSharedPreferences("my_ride", MODE_PRIVATE);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        //mapFragment.getMapAsync(this);
 
 
-
+        imgDummyMap= (ImageView) findViewById(R.id.imgDummyMap);
         mEtPickLocation = (AutoCompleteTextView) findViewById(R.id.etPickLocation);
         mEtDropLocation = (AutoCompleteTextView) findViewById(R.id.etDropLocation);
         mCurSpinner = (Spinner) findViewById(R.id.currency_spinner);
         mCurSpinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+       /* mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, 0, this)
                 .addApi(Places.GEO_DATA_API)
-                .build();
+                .build();*/
 
 
         mAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient, null, null);
@@ -167,7 +170,9 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
         findViewById(R.id.btnSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LatLng fromPosition = pickLatLng;
+
+
+                  LatLng fromPosition = pickLatLng;
                 LatLng toPosition = dropLatLng;
 
                 //mMap.clear();
@@ -175,11 +180,18 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
-                if (pickLatLng == null || dropLatLng == null) {
+                /*if (pickLatLng == null || dropLatLng == null) {
                     Toast.makeText(ShowRouteActivity.this, "Please select proper Locations", Toast.LENGTH_SHORT).show();
                 } else {
                     layLocation.setVisibility(View.GONE);
                     drawRoute();
+                }*/
+
+                layLocation.setVisibility(View.GONE);
+                if(selectedPos==0){
+                    imgDummyMap.setImageDrawable(getResources().getDrawable(R.drawable.goyenka));
+                }else {
+                    imgDummyMap.setImageDrawable(getResources().getDrawable(R.drawable.sanidhya));
                 }
 
 
@@ -457,9 +469,9 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
 
 
 
-    @Override
+    /*@Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        mMap = googleMap;*/
 
         //Bundle bundle = getIntent().getParcelableExtra("bundle");
         //  LatLng fromPosition = bundle.getParcelable("from_position");
@@ -479,12 +491,12 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
         Point displaySize = new Point();
         getWindowManager().getDefaultDisplay().getSize(displaySize);
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, displaySize.x, 250, 30));*/
-    }
+   /* }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-    }
+    }*/
 
 
     public static void storeArrayVal(ArrayList<CustomArray> inArrayList, Context context)
@@ -526,6 +538,7 @@ public class ShowRouteActivity extends FragmentActivity implements OnMapReadyCal
     private class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            selectedPos=pos;
             if(pos==0){
                 dropLatLng= goenka;
                /* if(!firstTime){
